@@ -6,7 +6,12 @@ package gowebkitgtk6
 
 extern void WriteFolderPath(char *);
 extern void WriteFilePath(char *);
+extern void WriteSavePath(char *);
 
+static void save_callback(GObject *src, GAsyncResult* _res_, gpointer user_data){
+	char* res = (char*)app_file_save_dialog_finish( _res_);
+	WriteSavePath(res);
+}
 static void folder_callback(GObject *src, GAsyncResult* _res_, gpointer user_data){
 	char* res = (char*)app_folder_select_dialog_finish( _res_);
 	WriteFolderPath(res);
@@ -35,6 +40,16 @@ void folder_select_dialog (const gchar* title,
 		folder_callback,
 		NULL);
 }
+
+void file_save_dialog (const gchar* title,
+                               const gchar* start)
+{
+    app_file_save_dialog(title,
+		start,
+		save_callback,
+		NULL);
+}
+
 */
 import "C"
 
@@ -68,6 +83,15 @@ func AppSelectFolder(title, startPath string) chan string {
 	folderChan = ret
 
 	C.folder_select_dialog(C.CString(title),
+		C.CString(startPath))
+	return ret
+}
+
+func AppFileSave(title, startPath string) chan string {
+	ret := make(chan string)
+	saveChan = ret
+
+	C.file_save_dialog(C.CString(title),
 		C.CString(startPath))
 	return ret
 }

@@ -23,6 +23,26 @@ public class App: GLib.Object {
         return this.app.run(null);
     }
 
+    public static async string? file_save_dialog(string title, string? start){
+        var dlg = new Gtk.FileDialog();
+        
+        dlg.set_modal(true);
+        dlg.set_title(title);
+        
+        if( start != null ){
+            var folder= GLib.File.new_for_path(start);
+            dlg.set_initial_folder(folder);
+        }
+        try{
+            var res = yield dlg.save(App.application.win, null);
+            return res.get_path();
+        }catch (GLib.Error e) {
+            stderr.puts(e.message);
+            return null;
+        }
+        
+    }
+
     public static async string? file_select_dialog(string title, string? pattern, string? start){
         var dlg = new Gtk.FileDialog();
         
@@ -39,7 +59,6 @@ public class App: GLib.Object {
         }
         try{
             var res = yield dlg.open(App.application.win, null);
-        
             return res.get_path();
         }catch (GLib.Error e) {
             stderr.puts(e.message);

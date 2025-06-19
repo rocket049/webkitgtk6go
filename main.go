@@ -100,6 +100,22 @@ func serve(actions *API, static string) *http.Server {
 		}()
 	})
 
+	svr.HandleFunc("/api/save_file", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+		w.WriteHeader(200)
+		w.Write([]byte("ok"))
+		fmt.Println("call /api/save_file")
+		res := gowebkitgtk6.AppFileSave("选择保存文件！！！", ".")
+		go func() {
+			p, ok := <-res
+			if ok {
+				fmt.Println("Get save file path:", p)
+				rpcClient.Notify(r, "show", p)
+			}
+
+		}()
+	})
+
 	svr.HandleFunc("/api/open_folder", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 		w.WriteHeader(200)

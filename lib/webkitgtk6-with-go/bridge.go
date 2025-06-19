@@ -2,6 +2,15 @@ package gowebkitgtk6
 
 import "C"
 
+var saveChan chan string
+
+//export WriteSavePath
+func WriteSavePath(s *C.char) {
+	if saveChan != nil {
+		saveChan <- C.GoString(s)
+	}
+}
+
 var fileChan chan string
 
 //export WriteFilePath

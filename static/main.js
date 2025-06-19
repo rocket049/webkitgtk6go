@@ -71,6 +71,12 @@ document.getElementById("open_file").addEventListener(
 		fetch("/api/open_file");
 	}
 );
+document.getElementById("save_file").addEventListener(
+	"click",
+	(event) => {
+		fetch("/api/save_file");
+	}
+);
 document.getElementById("open_folder").addEventListener(
 	"click",
 	(event) => {
