@@ -1,4 +1,6 @@
 gitee.com/rocket049/syncmap v1.0.6 h1:BLfKcvaItq0EO30dEj6UjJpvX+LJxh8MNV0oINAR79s=
 gitee.com/rocket049/syncmap v1.0.6/go.mod h1:6D3kyiwetDUfnlbYwMhQWXJsfxc/3wE/gVZIsu9k8jE=
+gitee.com/rocket049/websocketrpc v1.0.8 h1:bi+l4i9FR8PkaG9ICDJlXeIqodkRuxPEy8eekHTQ1vU=
+gitee.com/rocket049/websocketrpc v1.0.8/go.mod h1:VA0mJASy0EzLFAXnZW557/yEg7pBZrGqyy2dKOYot8A=
 github.com/gorilla/websocket v1.5.3 h1:saDtZ6Pbx/0u+bgYQ3q96pZgCzfhKXGPqt7kZ72aNNg=
 github.com/gorilla/websocket v1.5.3/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
