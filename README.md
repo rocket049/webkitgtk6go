@@ -1,7 +1,7 @@
 # 使用go语言做的前端后端集成框架
 
 * 后端用go语言实现一个集成了websocket和静态文件服务的服务端。
-* 前端用GTK4和WebKitGtk-6.0实现。
+* 前端用GTK4和WebKitGtk-6.0实现，代码在 `lib/webkitgtk6-with-go`，包名是`gowebkitgtk6`。
 * 前端调用后端的时候用`fetch`调用普通的`web api`。
 * 后端调用前端的时候，用运行在`websocket`上的`RPC`调用。
 
