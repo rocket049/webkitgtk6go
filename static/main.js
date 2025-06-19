@@ -64,3 +64,16 @@ document.getElementById("test_quit").addEventListener(
 		fetch("/api/quit");
 	}
 );
+
+document.getElementById("open_file").addEventListener(
+	"click",
+	(event) => {
+		fetch("/api/open_file");
+	}
+);
+document.getElementById("open_folder").addEventListener(
+	"click",
+	(event) => {
+		fetch("/api/open_folder");
+	}
+);

@@ -84,6 +84,37 @@ func serve(actions *API, static string) *http.Server {
 		actions.Quit()
 	})
 
+	svr.HandleFunc("/api/open_file", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+		w.WriteHeader(200)
+		w.Write([]byte("ok"))
+		fmt.Println("call /api/open_file")
+		res := gowebkitgtk6.AppSelectFile("选择文件！！！", "*", ".")
+		go func() {
+			p, ok := <-res
+			if ok {
+				fmt.Println("Get file path:", p)
+				rpcClient.Notify(r, "show", p)
+			}
+
+		}()
+	})
+
+	svr.HandleFunc("/api/open_folder", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+		w.WriteHeader(200)
+		w.Write([]byte("ok"))
+		fmt.Println("call /api/open_folder")
+		res := gowebkitgtk6.AppSelectFolder("选择目录！！！", ".")
+		go func() {
+			p, ok := <-res
+			if ok {
+				fmt.Println("Get folder path:", p)
+				rpcClient.Notify(r, "show", p)
+			}
+		}()
+	})
+
 	go func() {
 		httpserver.Serve(l)
 		log.Println("http server stop.")

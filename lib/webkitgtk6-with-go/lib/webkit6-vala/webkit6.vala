@@ -5,6 +5,7 @@ using GLib;
 public class App: GLib.Object {
     public Gtk.Application app;
     public WebKit.WebView webview;
+    public Gtk.Window win;
     private string home_url;
     private string title;
 
@@ -16,10 +17,56 @@ public class App: GLib.Object {
 
     public int run(string uri) {
         this.app.activate.connect((app)=>{
-            stdout.puts("on activate\n");
+            //stdout.puts("on activate\n");
             this.on_app_activate(this.app, uri);
         });
         return this.app.run(null);
+    }
+
+    public static async string? file_select_dialog(string title, string? pattern, string? start){
+        var dlg = new Gtk.FileDialog();
+        
+        dlg.set_modal(true);
+        dlg.set_title(title);
+        if( pattern != null ) {
+            var filter= new Gtk.FileFilter();
+            filter.add_pattern(pattern);
+            dlg.set_default_filter(filter);
+        }
+        if( start != null ){
+            var folder= GLib.File.new_for_path(start);
+            dlg.set_initial_folder(folder);
+        }
+        try{
+            var res = yield dlg.open(App.application.win, null);
+        
+            return res.get_path();
+        }catch (GLib.Error e) {
+            stderr.puts(e.message);
+            return null;
+        }
+        
+    }
+    
+    public static async string? folder_select_dialog(string title,  string? start){
+            var dlg = new Gtk.FileDialog();
+        
+            dlg.set_modal(true);
+            dlg.set_title(title);
+
+            if( start != null ){
+                var folder= GLib.File.new_for_path(start);
+                dlg.set_initial_folder(folder);
+            }
+            try {
+                var res = yield dlg.select_folder(App.application.win, null);
+                return res.get_path();
+            }
+            catch (GLib.Error e ) {
+                stderr.puts(e.message);
+                return null;
+            }
+
     }
 
     private void on_app_activate(Gtk.Application app, string uri) {
@@ -40,6 +87,7 @@ public class App: GLib.Object {
         });
 
         win.present();
+        this.win=win;
     }
 
     private void modify_menu( WebKit.ContextMenu menu ){
