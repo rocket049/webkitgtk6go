@@ -7,25 +7,11 @@
 
 ## 编译方法：
 
-### 1、编译图形界面代码
 以`ubuntu24.04`为例：
 ```
     #第一步，安装编译环境
-    sudo apt install build-essential meson-1.5 valac libwebkitgtk-6.0-dev libgtk-4-dev
-    #第二步，编译libwebkit6go.a
-    cd lib/webkitgtk6-with-go/lib/webkit6-vala/
-    meson setup build
-    cd build
-    meson compile
-    #第三步，把编译生成的库文件复制到webkitgtk6-with-go目录
-    cp libwebkit6go.so ../../../
-    cp -r libwebkit6go.so.p ../../../
-    #上面这个有点奇怪，但是不复制过去 gowebkitgtk6 模块编译不了
-    cp webkit6go.h ../../../
-```
-### 2、编译主程序
-```
-    cd ../../../../..
+    sudo apt install build-essential libwebkitgtk-6.0-dev libgtk-4-dev
+    #第二步，编译主程序
     go mod tidy
     go build
 ```
