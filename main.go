@@ -37,7 +37,9 @@ func main() {
 	server := serve(actions, *static)
 	defer server.Close()
 
-	ret := gowebkitgtk6.AppRun("org.webkit.example", "go语言做的websocket前后端通讯框架", fmt.Sprintf("http://localhost:%v", Port))
+	gowebkitgtk6.AppCreate("org.webkit.example", "go语言做的websocket前后端通讯框架", fmt.Sprintf("http://localhost:%v", Port))
+	gowebkitgtk6.AppResize(400, 800)
+	ret := gowebkitgtk6.AppRun()
 	println("exit status: ", ret)
 
 }
