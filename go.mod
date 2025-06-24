@@ -5,7 +5,7 @@ go 1.23.5
 toolchain go1.23.10
 
 require (
-	gitee.com/rocket049/gowebkitgtk6 v1.0.4
+	gitee.com/rocket049/gowebkitgtk6 v1.0.5
 	gitee.com/rocket049/websocketrpc v1.0.8
 )
 
