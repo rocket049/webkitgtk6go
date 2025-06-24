@@ -12,7 +12,7 @@ import (
 
 	"gitee.com/rocket049/websocketrpc"
 
-	"gowebkitgtk6"
+	"gitee.com/rocket049/gowebkitgtk6"
 )
 
 const Port = 17680
@@ -93,8 +93,8 @@ func serve(actions *API, static string) *http.Server {
 		go func() {
 			p, ok := <-res
 			if ok {
-				fmt.Println("Get file path:", p)
-				rpcClient.Notify(r, "show", p)
+				log.Println("Get file path:", p)
+				rpcClient.Notify(r, "show", fmt.Sprintf("open file path:%v", p))
 			}
 
 		}()
@@ -109,8 +109,8 @@ func serve(actions *API, static string) *http.Server {
 		go func() {
 			p, ok := <-res
 			if ok {
-				fmt.Println("Get save file path:", p)
-				rpcClient.Notify(r, "show", p)
+				log.Println("Get save file path:", p)
+				rpcClient.Notify(r, "show", fmt.Sprintf("save file path:%v", p))
 			}
 
 		}()
@@ -125,8 +125,8 @@ func serve(actions *API, static string) *http.Server {
 		go func() {
 			p, ok := <-res
 			if ok {
-				fmt.Println("Get folder path:", p)
-				rpcClient.Notify(r, "show", p)
+				log.Println("Get folder path:", p)
+				rpcClient.Notify(r, "show", fmt.Sprintf("open folder path:%v", p))
 			}
 		}()
 	})
