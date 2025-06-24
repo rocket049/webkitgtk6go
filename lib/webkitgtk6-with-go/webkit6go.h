@@ -1,1 +1,0 @@
-lib/webkit6-vala/build/webkit6go.h
