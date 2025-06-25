@@ -133,6 +133,13 @@ func serve(actions *API, static string) *http.Server {
 		}()
 	})
 
+	svr.HandleFunc("/api/show_inspector", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+		w.WriteHeader(200)
+		w.Write([]byte("ok"))
+		gowebkitgtk6.AppShowInspector()
+	})
+
 	go func() {
 		httpserver.Serve(l)
 		log.Println("http server stop.")

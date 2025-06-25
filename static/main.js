@@ -83,3 +83,9 @@ document.getElementById("open_folder").addEventListener(
 		fetch("/api/open_folder");
 	}
 );
+document.getElementById("show_inspector").addEventListener(
+	"click",
+	(event) => {
+		fetch("/api/show_inspector");
+	}
+);
