@@ -71,6 +71,12 @@ document.getElementById("open_file").addEventListener(
 		fetch("/api/open_file");
 	}
 );
+document.getElementById("open_files").addEventListener(
+	"click",
+	(event) => {
+		fetch("/api/open_files");
+	}
+);
 document.getElementById("save_file").addEventListener(
 	"click",
 	(event) => {
@@ -81,6 +87,12 @@ document.getElementById("open_folder").addEventListener(
 	"click",
 	(event) => {
 		fetch("/api/open_folder");
+	}
+);
+document.getElementById("open_folders").addEventListener(
+	"click",
+	(event) => {
+		fetch("/api/open_folders");
 	}
 );
 document.getElementById("show_inspector").addEventListener(

@@ -118,12 +118,42 @@ func serve(actions *API, static string) *http.Server {
 		}()
 	})
 
+	svr.HandleFunc("/api/open_files", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+		w.WriteHeader(200)
+		w.Write([]byte("ok"))
+		res := gowebkitgtk6.AppSelectMultiFile("选择多个文件！！！", "*", ".")
+		go func() {
+			p, ok := <-res
+			if ok {
+				log.Println("Get save file path:", p)
+				rpcClient.Notify(r, "show", fmt.Sprintf("save file path:%v", p))
+			}
+
+		}()
+	})
+
 	svr.HandleFunc("/api/open_folder", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 		w.WriteHeader(200)
 		w.Write([]byte("ok"))
 		fmt.Println("call /api/open_folder")
 		res := gowebkitgtk6.AppSelectFolder("选择目录！！！", ".")
+		go func() {
+			p, ok := <-res
+			if ok {
+				log.Println("Get folder path:", p)
+				rpcClient.Notify(r, "show", fmt.Sprintf("open folder path:%v", p))
+			}
+		}()
+	})
+
+	svr.HandleFunc("/api/open_folders", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+		w.WriteHeader(200)
+		w.Write([]byte("ok"))
+		fmt.Println("call /api/open_folder")
+		res := gowebkitgtk6.AppSelectMultiFolder("选择多个目录！！！", ".")
 		go func() {
 			p, ok := <-res
 			if ok {
