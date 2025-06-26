@@ -37,7 +37,7 @@ func main() {
 		actions := &API{}
 		server := serve(actions, *static)
 		defer server.Close()
-		gowebkitgtk6.AppCreate("org.webkit.example", "go语言做的websocket前后端通讯框架", fmt.Sprintf("http://localhost:%v", Port))
+		gowebkitgtk6.AppCreate("org.webkit.scratch", "Scratch 3 (WebKit)", fmt.Sprintf("http://localhost:%v", Port))
 	} else {
 		gowebkitgtk6.AppCreate("org.webkit.example", "wekit6 browser", *url)
 	}
