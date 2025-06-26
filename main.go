@@ -25,6 +25,7 @@ func (a *API) Quit() error {
 }
 
 func main() {
+	url := flag.String("url", "", "open URL")
 	debug := flag.Bool("debug", false, "debug mode")
 	static := flag.String("static", "static", "静态页面目录")
 	flag.Parse()
@@ -32,13 +33,19 @@ func main() {
 		log.SetOutput(io.Discard)
 	}
 
-	actions := &API{}
+	if *url == "" {
+		actions := &API{}
+		server := serve(actions, *static)
+		defer server.Close()
+		gowebkitgtk6.AppCreate("org.webkit.example", "go语言做的websocket前后端通讯框架", fmt.Sprintf("http://localhost:%v", Port))
+	} else {
+		gowebkitgtk6.AppCreate("org.webkit.example", "wekit6 browser", *url)
+	}
 
-	server := serve(actions, *static)
-	defer server.Close()
-
-	gowebkitgtk6.AppCreate("org.webkit.example", "go语言做的websocket前后端通讯框架", fmt.Sprintf("http://localhost:%v", Port))
-	gowebkitgtk6.AppResize(400, 800)
+	gowebkitgtk6.AppResize(1024, 768)
+	if *debug {
+		gowebkitgtk6.AppShowInspector()
+	}
 	ret := gowebkitgtk6.AppRun()
 	println("exit status: ", ret)
 
