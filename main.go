@@ -15,7 +15,7 @@ import (
 	"gitee.com/rocket049/gowebkitgtk6"
 )
 
-const Port = 17680
+var Port = 17680
 
 type API struct{}
 
@@ -25,10 +25,12 @@ func (a *API) Quit() error {
 }
 
 func main() {
+	port := flag.Int("port", 17680, "server listen port")
 	url := flag.String("url", "", "open URL")
 	debug := flag.Bool("debug", false, "debug mode")
 	static := flag.String("static", "static", "静态页面目录")
 	flag.Parse()
+	Port = *port
 	if !*debug {
 		log.SetOutput(io.Discard)
 	}
