@@ -1,12 +1,18 @@
-# 使用go语言做的前端后端集成框架(A front-end and back-end integration framework using the Go language)
+# 使用go语言做的前端后端集成框架
 
 * 后端用go语言实现一个集成了websocket和静态文件服务的服务端。
 * 前端用GTK4和WebKitGtk-6.0实现，代码在 `lib/webkitgtk6-with-go`，包名是`gowebkitgtk6`。
 * 前端调用后端的时候用`fetch`调用普通的`web api`。
 * 后端调用前端的时候，用运行在`websocket`上的`RPC`调用。
 
+**注意：**为了展示本框架的潜力，现在我把目前最新版的`scratch-gui`作为我的示例程序，保存在`static`；如果要看如何使用本框架的特殊能力（ websocket-rpc 、调用本地对话框 ），请看目录`static-exam`内的`main.js`程序。 2025-06-26
+
 ## 截图：
 ![webkitgtk6go](webkitgo.png)
+
+scratch-gui:
+
+![scratch-gui](scratch-gui.png)
 
 ## 编译方法：
 

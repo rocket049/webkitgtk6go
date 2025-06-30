@@ -7,6 +7,10 @@
 ##Screenshot:
 ![webkitgtk6go](webkitgo.png)
 
+scratch-gui:
+
+![scratch-gui](scratch-gui.png)
+
 ##Compilation method:
 Taking 'Ubuntu 24.04' as an example:
 
